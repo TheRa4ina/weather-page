@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<%inc#include<json/value.h>%>
+<%c++
+    auto weather=@@.get<Json::Value>("weather_json");
+%>
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="style.css">
+            <title>Погода в Москве</title>
+        </head>
+        <body>
+            <div class="weather-section">
+                <h1>Погода сегодня</h1>
+                <h2>
+                    <div class="weather-condition" id="today">
+                        <img src= "{% weather["current"]["condition"]["icon"].asString()%}" alt=weather icon/>
+                        <span class="status">{%weather["current"]["condition"]["text"].asString()%}</span>
+                    </div>
+                </h2>
+                <h3>
+                    Температура
+                </h3>
+                <p>
+                    Текущая температура: {%weather["current"]["temp_c"].asFloat()%} C&deg;<br />
+                    Ощущается как: {% weather["current"]["feelslike_c"].asFloat()%} C&deg;
+
+                </p>
+                <h3>
+                    Ветер
+                </h3>
+                <p>
+                    Скорость ветра = {%weather["current"]["wind_kph"].asFloat()%} Км/ч<br />
+                    Угол ветра = {%weather["current"]["wind_degree"].asFloat()%}&deg;
+                </p>
+                <h3>
+                    Влажность
+                </h3>
+                <p>
+                    Влажность сейчас = {%weather["current"]["humidity"].asInt()%}&#37;
+                </p>
+            </div>
+            <a href="#tommorow" id="showTomorrow">Показать погоду завтра</a>
+<%c++
+auto tommorows=weather["forecast"]["forecastday"][1]["day"];
+%>
+            <div class="weather-section" id="tommorow">
+                <h1>Погода завтра</h1>
+                <h2>
+                    <div class="weather-condition">
+                        <img src= "{% tommorows["condition"]["icon"].asString()%}" alt=weather icon/>
+                        <span class="status">{%tommorows["condition"]["text"].asString()%}</span>
+                    </div>
+                </h2>
+                <h3>
+                    Температура
+                </h3>
+                <p>
+                    Минимальая температура: {%tommorows["mintemp_c"].asFloat()%}C&deg;<br />
+                    Средняя температура: {%tommorows["avgtemp_c"].asFloat()%}C&deg;<br />
+                    Максимальная температура: {%tommorows["maxtemp_c"].asFloat()%}C&deg;
+
+                </p>
+                <h3>
+                    Ветер
+                </h3>
+                <p>
+                    Максимальная скорость ветра: {%tommorows["maxwind_kph"].asFloat()%} Км/ч
+                </p>
+                <h3>
+                    Влажность
+                </h3>
+                <p>
+                    Средняя влажность: {%tommorows["avghumidity"].asInt()%}&#37;
+                </p>
+            </div>
+        </body>
+</html>

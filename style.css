@@ -1,0 +1,131 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3 {
+    margin: 10px;
+    text-align: center; /* Ensure text is centered */
+}
+
+.weather-condition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.weather-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+}
+
+.weather-condition img {
+    width: 100px;
+    height: 100px;
+}
+
+.status {
+    font-size: 24px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+}
+
+/* Responsive design */
+/* Define the slide and fade animation */
+@keyframes slideFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-100vw);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the animation to the main content */
+.weather-section, h2, h3, p {
+    animation: slideFade 1s ease-out forwards;
+    opacity: 0; /* Start with the element being invisible */
+}
+
+/* Stagger the animation for each element to create a sequential effect */
+.weather-section {
+    animation-delay: 0s;
+}
+
+h3:nth-of-type(1) {
+    animation-delay: 0.2s;
+}
+
+p:nth-of-type(1) {
+    animation-delay: 0.4s;
+}
+
+h3:nth-of-type(2) {
+    animation-delay: 0.6s;
+}
+
+p:nth-of-type(2) {
+    animation-delay: 0.8s;
+}
+
+h3:nth-of-type(3) {
+    animation-delay: 1s;
+}
+
+p:nth-of-type(3) {
+    animation-delay: 1.2s;
+}
+
+#showTomorrow {
+    animation: slideFade 1s ease-out forwards;
+    opacity: 0;
+    animation-delay: 1.4s;
+}
+
+#tommorow {
+    display: none;
+}
+
+    /* Show the tomorrow's weather section when it's targeted */
+    #tommorow:target {
+        display: block;
+    }
+
+#showTomorrow {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    #showTomorrow:hover {
+        background-color: #0056b3;
+    }
