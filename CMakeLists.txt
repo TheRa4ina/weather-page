@@ -41,8 +41,8 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 add_executable(tests
-fetching.cc
-    main.tests.cc)
+    fetching.cc
+    fetching.tests.cc)
     
 target_link_libraries(tests
 PRIVATE 
