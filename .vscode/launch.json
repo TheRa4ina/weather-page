@@ -2,6 +2,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(ctest) Launch",
+            "type": "cppdbg",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "program": "${cmake.testProgram}",
+            "args": [ "${cmake.testArgs}" ],
+            // other options...
+        },        
+        {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",

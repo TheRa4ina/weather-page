@@ -1,4 +1,5 @@
 #include <drogon/drogon.h>
+#include <future>
 #include "env.h" // for api key
 
 using namespace drogon;
@@ -12,14 +13,19 @@ Json::Value fetchWeatherDataAsJson() {
     req->setParameter("q", "Moscow");
     req->setParameter("days", "3");
     req->setParameter("lang", "ru");
-    Json::Value json_result;
-    client->sendRequest(req, [json_result](ReqResult result, const HttpResponsePtr& response) {
+
+    Json::Value res;
+    // Get the future associated with the promise
+    client->sendRequest(req, [&res](ReqResult result, const HttpResponsePtr& response) {
         if (result != ReqResult::Ok) {
             LOG_ERROR << "error while sending request to server! result:" << result <<'\n';
             throw "error sending request";
         }
-        json_result = *(response->getJsonObject());
+        std::promise<Json::Value> promise;
+        promise.set_value(*response->getJsonObject());
+        auto future = promise.get_future();
+        res = future.get();
 
      });
-    return json_result;
+    return res;
 }
