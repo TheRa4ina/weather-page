@@ -15,17 +15,17 @@ Json::Value fetchWeatherDataAsJson() {
     req->setParameter("lang", "ru");
 
     Json::Value res;
+    std::promise<Json::Value> promise;
+    auto future = promise.get_future();
     // Get the future associated with the promise
-    client->sendRequest(req, [&res](ReqResult result, const HttpResponsePtr& response) {
+    client->sendRequest(req, [&promise](ReqResult result, const HttpResponsePtr& response) {
         if (result != ReqResult::Ok) {
             LOG_ERROR << "error while sending request to server! result:" << result <<'\n';
             throw "error sending request";
         }
-        std::promise<Json::Value> promise;
         promise.set_value(*response->getJsonObject());
-        auto future = promise.get_future();
-        res = future.get();
+    });
+    res = future.get();
 
-     });
     return res;
 }
