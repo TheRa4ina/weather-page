@@ -5,13 +5,13 @@
 #define DROGON_TEST_MAIN
 #include <drogon/drogon_test.h>
 
-TEST(fetching, fetching_currentConditionIcon_IconUrl)
+TEST(fetching, fetching_getJson_nonErrorJson)
 {
 	Json::Value json = fetchWeatherDataAsJson();
 	Json::Value error_code = json["error"]["code"];
 
-	ASSERT_TRUE(error_code.isNull()) << "error code is "<<error_code.asInt();
-	ASSERT_FALSE(json.isNull());
+	ASSERT_TRUE(error_code.isNull()) << "error code is "<<error_code.asInt() <<"check https://www.weatherapi.com/docs/ for more info";
+	ASSERT_FALSE(json.isNull()) << "something went horribly wrong";
 }
 
 
