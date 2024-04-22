@@ -53,6 +53,7 @@ target_include_directories(tests
 PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR})
 
+include(CTest)# without this include testing tab in vscode doesn't work
 include(GoogleTest)
 
 
