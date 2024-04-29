@@ -99,7 +99,7 @@
     "app": {
         //number_of_threads: The number of IO threads, 1 by default, if the value is set to 0, the number of threads
         //is the number of CPU cores
-        "number_of_threads": 1,
+        "number_of_threads": 8,
         //enable_session: False by default
         "enable_session": false,
         "session_timeout": 0,
@@ -230,7 +230,7 @@
             "max_files": 0,
             //log_level: "DEBUG" by default,options:"TRACE","DEBUG","INFO","WARN"
             //The TRACE level is only valid when built in DEBUG mode.
-            "log_level": "DEBUG",
+            "log_level": "WARN",
             //display_local_time: false by default, if true, the log time is displayed in local time
             "display_local_time": false
         },
