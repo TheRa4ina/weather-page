@@ -14,8 +14,6 @@ Json::Value fetchWeatherDataAsJson() {
     req->setParameter("lang", "ru");
 
     Json::Value res;
-    std::promise<Json::Value> promise;
-    auto future = promise.get_future();
     // Get the future associated with the promise
     res = *client->sendRequest(req).second->getJsonObject();
 
