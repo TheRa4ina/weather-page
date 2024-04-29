@@ -1,5 +1,5 @@
-	#include <gtest/gtest.h>
-#include <fetching.h>
+#include <gtest/gtest.h>
+#include "WeatherCache.h"
 #include <future>
 #include <drogon/drogon.h>
 #define DROGON_TEST_MAIN
@@ -9,10 +9,12 @@
 class ApiCallTest : public testing::Test {
 protected:
 	ApiCallTest()
-		: weather_json(fetchWeatherDataAsJson())
-	{}
+	{
+		WeatherCache cache;
+		weather_json = cache.getWeatherData();
+	}
 
-	const Json::Value weather_json;
+	Json::Value weather_json;
 };
 
 TEST_F(ApiCallTest, fetching_getJson_jsonNotNullNoErrors)

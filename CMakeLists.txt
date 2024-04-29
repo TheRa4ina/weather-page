@@ -19,7 +19,7 @@ configure_file(config.json ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 configure_file(style.css ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 add_executable(server 
     main.cc
-    fetching.cc
+    WeatherCache.cc
     index.cc)
 target_link_libraries(server PRIVATE Drogon::Drogon)
 
@@ -41,8 +41,8 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 add_executable(tests
-    fetching.cc
-    fetching.tests.cc)
+    WeatherCache.cc
+    WeatherCache.tests.cc)
     
 target_link_libraries(tests
 PRIVATE 
